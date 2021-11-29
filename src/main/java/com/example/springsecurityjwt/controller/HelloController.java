@@ -33,13 +33,13 @@ public class HelloController {
     }
 
     @RequestMapping(value = "/token",method = RequestMethod.POST)
-    public ResponseEntity<?> token(@RequestBody AuthRequest authRequest) throws Exception{
+    public ResponseEntity<?> token(@RequestBody AuthRequest authRequest) throws BadCredentialsException{
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword())
             );
         } catch (BadCredentialsException badCredentialsException){
-            throw new Exception("Incorrect Username or Password", badCredentialsException);
+            throw badCredentialsException;
         }
 
         final UserDetails user = myUserDetailsService.loadUserByUsername(authRequest.getUsername());
