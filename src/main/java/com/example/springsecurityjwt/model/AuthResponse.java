@@ -2,17 +2,17 @@ package com.example.springsecurityjwt.model;
 
 public class AuthResponse {
 
-    private String token;
+    private TokenInfo token;
 
-    public AuthResponse(String token) {
+    public AuthResponse(TokenInfo token) {
         this.token = token;
     }
 
-    public String getToken() {
+    public TokenInfo getToken() {
         return token;
     }
 
-    public void setToken(String token) {
+    public void setToken(TokenInfo token) {
         this.token = token;
     }
 }

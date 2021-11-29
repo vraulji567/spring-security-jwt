@@ -2,6 +2,7 @@ package com.example.springsecurityjwt.controller;
 
 import com.example.springsecurityjwt.model.AuthRequest;
 import com.example.springsecurityjwt.model.AuthResponse;
+import com.example.springsecurityjwt.model.TokenInfo;
 import com.example.springsecurityjwt.service.MyUserDetailsService;
 import com.example.springsecurityjwt.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,7 @@ public class HelloController {
         }
 
         final UserDetails user = myUserDetailsService.loadUserByUsername(authRequest.getUsername());
-        String jwt = jwtUtil.generateToken(user);
+        TokenInfo jwt = jwtUtil.generateToken(user);
         return ResponseEntity.ok(new AuthResponse(jwt));
     }
 

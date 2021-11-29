@@ -1,5 +1,6 @@
 package com.example.springsecurityjwt.util;
 
+import com.example.springsecurityjwt.model.TokenInfo;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwt;
 import io.jsonwebtoken.Jwts;
@@ -40,15 +41,21 @@ public class JwtUtil {
         return extractExpiration(token).before(new Date());
     }
 
-    public String generateToken(UserDetails user){
+    public TokenInfo generateToken(UserDetails user){
         Map<String,Object> claims = new HashMap<>();
         return createToken(claims,user.getUsername());
     }
 
-    private String createToken(Map<String, Object> claims, String username) {
-        return Jwts.builder().setClaims(claims).setSubject(username).setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() * 1000 * 60 * 10))
-                .signWith(SignatureAlgorithm.HS256,SECRET).compact();
+    private TokenInfo createToken(Map<String, Object> claims, String username) {
+        TokenInfo token = new TokenInfo();
+        Date issueDate = new Date(System.currentTimeMillis());
+        Date expirationDate = new Date(System.currentTimeMillis() + (1000 * 60 * 10));
+        token.setIssueDate(issueDate);
+        token.setExpirationDate(expirationDate);
+        token.setToken(Jwts.builder().setClaims(claims).setSubject(username).setIssuedAt(issueDate)
+                .setExpiration(expirationDate)
+                .signWith(SignatureAlgorithm.HS256,SECRET).compact());
+        return token;
     }
 
     public Boolean validateToken(String token, UserDetails user){
