@@ -38,3 +38,6 @@ $kubectl get pod
 $kubectl get all
 $kubectl get node -o wide
 $kubectl logs {pod-name}
+
+# Nodeport port forwarding
+$ kubectl port-forward <pod-name> <nodeport:port>
