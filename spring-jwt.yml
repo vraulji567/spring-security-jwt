@@ -17,7 +17,7 @@ spec:
       containers:
         - name: spring-jwt
           image: spring-jwt:latest
-          imagePullPolicy: Never
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
 ---

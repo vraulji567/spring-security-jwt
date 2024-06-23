@@ -1,6 +1,6 @@
 # Docker commands
 
-docker build -t spring-jet -f Dockerfile .
+docker build -t spring-jwt -f Dockerfile .
 docker image . —tag spring-jwt
 docker run -d -p 8080:8080 spring-jwt
 
@@ -9,7 +9,7 @@ docker run -d -p 8080:8080 spring-jwt
 $ brew install minikube
 
 # Start Minikube in docker container
-$ minikube start —driver docker
+$ minikube start --driver docker
 
 $ minikube status
 
@@ -19,6 +19,10 @@ $ minikube stop
 
 $ minikube docker-env
 Run the eval command
+$ eval $(minikube docker-env)
+
+Build the image
+$ docker build -t spring-jwt:latest .
 
 $ docker image ls
 $ minikube image ls --format table 
